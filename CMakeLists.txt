@@ -21,7 +21,7 @@ include(GetDirectoryList)
 # Dependencies
 
 # VR Juggler
-find_package(VRJuggler 3.0 REQUIRED)
+find_package(VRJuggler 3.1 REQUIRED)
 include_directories(${VRJUGGLER_INCLUDE_DIRS})
 list(APPEND RUNTIME_LIBRARY_DIRS ${VRJUGGLER_RUNTIME_LIBRARY_DIRS})
 add_definitions(${VRJUGGLER_DEFINITIONS})

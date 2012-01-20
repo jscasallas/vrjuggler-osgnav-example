@@ -1,4 +1,4 @@
-cmake version 2.8.3
+cmake version 2.8.6
 ------------------------------------------------------------------------------
 Introduction
 
@@ -696,7 +696,7 @@ a few.
 
          CPPDOM_ROOT_DIR - A directory prefix to search
                            (a path that contains include/ as a subdirectory)
-         CPPDOM_ADDITIONAL_VERSIONS - Additional versions (outside of 0.7.8 to 1.0.0)
+         CPPDOM_ADDITIONAL_VERSIONS - Additional versions (outside of 0.7.8 to 1.2.0)
                                       to use when constructing search names and paths
 
        
@@ -713,11 +713,11 @@ a few.
        change this environment variable, because it cannot auto-detect this
        change and trigger an automatic re-run.
 
-       Original Author: 2009-2010 Ryan Pavlik <rpavlik@iastate.edu>
+       Original Author: 2009-2012 Ryan Pavlik <rpavlik@iastate.edu>
        <abiryan@ryand.net> http://academic.cleardefinition.com Iowa State
        University HCI Graduate Program/VRAC
 
-       Copyright Iowa State University 2009-2010.  Distributed under the
+       Copyright Iowa State University 2009-2012.  Distributed under the
        Boost Software License, Version 1.0.  (See accompanying file
        LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
@@ -751,6 +751,42 @@ a few.
        Copyright Iowa State University 2009-2010.  Distributed under the
        Boost Software License, Version 1.0.  (See accompanying file
        LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+  FindDirectInput
+       try to find DirectInput library (part of DirectX SDK)
+
+       
+
+       Cache Variables: (probably not for direct use in your scripts)
+
+         DIRECTINPUT_DXGUID_LIBRARY
+         DIRECTINPUT_DXERR_LIBRARY
+         DIRECTINPUT_DINPUT_LIBRARY
+         DIRECTINPUT_INCLUDE_DIR
+
+       
+
+       Non-cache variables you should use in your CMakeLists.txt:
+
+         DIRECTINPUT_LIBRARIES
+         DIRECTINPUT_INCLUDE_DIRS
+         DIRECTINPUT_FOUND - if this is not true, do not attempt to use this library
+
+       
+
+       Requires these CMake modules:
+
+         FindPackageHandleStandardArgs (known included with CMake >=2.6.2)
+
+       
+
+       Original Author: 2011 Ryan Pavlik <rpavlik@iastate.edu>
+       <abiryan@ryand.net> http://academic.cleardefinition.com Iowa State
+       University HCI Graduate Program/VRAC
+
+       Copyright Iowa State University 2011.  Distributed under the Boost
+       Software License, Version 1.0.  (See accompanying file LICENSE_1_0.txt
+       or copy at http://www.boost.org/LICENSE_1_0.txt)
 
   FindFlagpoll
        try to find Flagpoll application, and offer package-finding services
@@ -913,7 +949,7 @@ a few.
 
          GMTL_ROOT_DIR - A directory prefix to search
                          (a path that contains include/ as a subdirectory)
-         GMTL_ADDITIONAL_VERSIONS - Additional versions (outside of 0.5.1 to 0.6.2)
+         GMTL_ADDITIONAL_VERSIONS - Additional versions (outside of 0.5.1 to 0.7.0)
                                     to use when constructing search names and paths
 
        
@@ -930,11 +966,11 @@ a few.
        change this environment variable, because it cannot auto-detect this
        change and trigger an automatic re-run.
 
-       Original Author: 2009-2010 Ryan Pavlik <rpavlik@iastate.edu>
+       Original Author: 2009-2012 Ryan Pavlik <rpavlik@iastate.edu>
        <abiryan@ryand.net> http://academic.cleardefinition.com Iowa State
        University HCI Graduate Program/VRAC
 
-       Copyright Iowa State University 2009-2010.  Distributed under the
+       Copyright Iowa State University 2009-2012.  Distributed under the
        Boost Software License, Version 1.0.  (See accompanying file
        LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
@@ -1451,6 +1487,37 @@ a few.
        Boost Software License, Version 1.0.  (See accompanying file
        LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
+  FindMarkdown
+       try to find Markdown tool
+
+       
+
+       Cache Variables:
+
+         MARKDOWN_EXECUTABLE
+
+       
+
+       Non-cache variables you might use in your CMakeLists.txt:
+
+         MARKDOWN_FOUND
+
+       
+
+       Requires these CMake modules:
+
+         FindPackageHandleStandardArgs (known included with CMake >=2.6.2)
+
+       
+
+       Original Author: 2011 Ryan Pavlik <rpavlik@iastate.edu>
+       <abiryan@ryand.net> http://academic.cleardefinition.com Iowa State
+       University HCI Graduate Program/VRAC
+
+       Copyright Iowa State University 2011.  Distributed under the Boost
+       Software License, Version 1.0.  (See accompanying file LICENSE_1_0.txt
+       or copy at http://www.boost.org/LICENSE_1_0.txt)
+
   FindOpenCV
        ------------------------------
 
@@ -1578,6 +1645,49 @@ a few.
        University HCI Graduate Program/VRAC
 
        Copyright Iowa State University 2009-2010.  Distributed under the
+       Boost Software License, Version 1.0.  (See accompanying file
+       LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+  FindQVRPN
+       try to find QVRPN library
+
+       
+
+       Of course, you may also just choose to make QVRPN a submodule of your
+       project itself.
+
+       Cache Variables:
+
+         QVRPN_LIBRARY
+         QVRPN_INCLUDE_DIR
+
+       
+
+       Non-cache variables you might use in your CMakeLists.txt:
+
+         QVRPN_FOUND
+         QVRPN_LIBRARIES
+         QVRPN_INCLUDE_DIRS
+
+       
+
+       QVRPN_ROOT_DIR is searched preferentially for these files
+
+       Requires these CMake modules:
+
+         FindPackageHandleStandardArgs (known included with CMake >=2.6.2)
+
+       
+
+       Refactored from FindVRPN.cmake by: Juan Sebastian Casallas
+       <casallas@iastate.edu>
+
+       FindVRPN.cmake Original Author: 2009-2010 Ryan Pavlik
+       <rpavlik@iastate.edu> <abiryan@ryand.net>
+       http://academic.cleardefinition.com Iowa State University HCI Graduate
+       Program/VRAC
+
+       Copyright Iowa State University 2009-2012.  Distributed under the
        Boost Software License, Version 1.0.  (See accompanying file
        LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 
@@ -3002,20 +3112,20 @@ a few.
        These functions force a re-configure on each git commit so that you
        can trust the values of the variables in your build system.
 
-         get_git_head_revision(<refspecvar> <hashvar> [<additonal arguments to git describe> ...])
+         get_git_head_revision(<refspecvar> <hashvar> [<additional arguments to git describe> ...])
 
        
 
        Returns the refspec and sha hash of the current head revision
 
-         git_describe(<var> [<additonal arguments to git describe> ...])
+         git_describe(<var> [<additional arguments to git describe> ...])
 
        
 
        Returns the results of git describe on the source tree, and adjusting
        the output so that it tests false if an error occurs.
 
-         git_get_exact_tag(<var> [<additonal arguments to git describe> ...])
+         git_get_exact_tag(<var> [<additional arguments to git describe> ...])
 
        
 
@@ -3460,6 +3570,37 @@ a few.
        University HCI Graduate Program/VRAC
 
        Copyright Iowa State University 2009-2010.  Distributed under the
+       Boost Software License, Version 1.0.  (See accompanying file
+       LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+  UseMarkdown
+       Convert markdown source files to HTML as a custom target
+
+       
+
+         include(UseMarkdown)
+         add_markdown_target(<target_name> <directory to copy to> <markdownfile> [<markdownfile>...] [RENAME <newname>])
+           Relative paths for the destination directory are considered with
+           with respect to CMAKE_CURRENT_BINARY_DIR. The RENAME argument is only
+           valid with a single markdown file as input.
+
+       
+
+       
+
+         install_markdown_target(<target_name> [extra arguments to INSTALL(FILES ...) ])
+
+       
+
+       
+
+       Requires CMake 2.6 or newer (uses the 'function' command)
+
+       Original Author: 2011 Ryan Pavlik <rpavlik@iastate.edu>
+       <abiryan@ryand.net> http://academic.cleardefinition.com Iowa State
+       University HCI Graduate Program/VRAC
+
+       Copyright Iowa State University 2011-2012.  Distributed under the
        Boost Software License, Version 1.0.  (See accompanying file
        LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 

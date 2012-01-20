@@ -56,6 +56,8 @@
 # Iowa State University HCI Graduate Program/VRAC
 # Updated for VR Juggler 3.0 by:
 # Brandon Newendorp <brandon@newendorp.com>
+# Updated for VR Juggler 3.1 by:
+# Juan Sebastian Casallas <casallas@iastate.edu>
 #
 # Copyright Iowa State University 2009-2010.
 # Distributed under the Boost Software License, Version 1.0.
@@ -76,7 +78,7 @@ set(VRJUGGLER_ROOT_DIR
 	PATH
 	"Additional root directory to search for VR Juggler and its dependencies.")
 if(NOT VRJUGGLER_ROOT_DIR)
-	file(TO_CMAKE_PATH "$ENV{VJ_BASE_DIR}" VRJUGGLER30_ROOT_DIR)
+	file(TO_CMAKE_PATH "$ENV{VJ_BASE_DIR}" VRJUGGLER31_ROOT_DIR)
 endif()
 
 # Default required components
@@ -84,7 +86,7 @@ if(NOT VRJuggler_FIND_COMPONENTS)
 	set(VRJuggler_FIND_COMPONENTS vrjogl)
 endif()
 
-if(VRJuggler30_FIND_QUIETLY)
+if(VRJuggler31_FIND_QUIETLY)
 	set(_FIND_FLAGS "QUIET")
 else()
 	set(_FIND_FLAGS "")
@@ -92,21 +94,62 @@ endif()
 
 set(VRJUGGLER_FIND_22 TRUE)
 set(VRJUGGLER_FIND_30 TRUE)
+set(VRJUGGLER_FIND_31 TRUE)
 if(VRJuggler_FIND_VERSION)
 	if(VRJuggler_FIND_VERSION_EXACT)
 		if(VRJuggler_FIND_VERSION MATCHES "2.2" OR VRJuggler_FIND_VERSION MATCHES "22")
 			set(VRJUGGLER_FIND_30 FALSE)
+			set(VRJUGGLER_FIND_31 FALSE)
 		elseif(VRJuggler_FIND_VERSION MATCHES "3.0" OR VRJuggler_FIND_VERSION MATCHES "30")
 			set(VRJUGGLER_FIND_22 FALSE)
+			set(VRJUGGLER_FIND_31 FALSE)
+		elseif(VRJuggler_FIND_VERSION MATCHES "3.1" OR VRJuggler_FIND_VERSION MATCHES "31")
+			set(VRJUGGLER_FIND_22 FALSE)
+			set(VRJUGGLER_FIND_30 FALSE)
 		endif()
 	else()
 		if(VRJuggler_FIND_VERSION MATCHES "3.0" OR VRJuggler_FIND_VERSION MATCHES "30")
 			set(VRJUGGLER_FIND_22 FALSE)
+			set(VRJUGGLER_FIND_31 FALSE)
+		elseif(VRJuggler_FIND_VERSION MATCHES "3.1" OR VRJuggler_FIND_VERSION MATCHES "31")
+			set(VRJUGGLER_FIND_22 FALSE)
+			set(VRJUGGLER_FIND_30 FALSE)
 		endif()
 	endif()
 endif()
 
-if(VRJUGGLER_FIND_30)
+if(VRJUGGLER_FIND_31)
+	if(NOT VRJUGGLER31_ROOT_DIR)
+		set(VRJUGGLER31_ROOT_DIR ${VRJUGGLER_ROOT_DIR})
+	endif()
+	find_package(VRJuggler31 COMPONENTS ${VRJuggler_FIND_COMPONENTS})
+	if(VRJUGGLER31_FOUND)
+		set(VRJUGGLER_FOUND TRUE)
+
+		set(VRJUGGLER_LIBRARIES ${VRJUGGLER31_LIBRARIES})
+		set(VRJUGGLER_INCLUDE_DIRS ${VRJUGGLER31_INCLUDE_DIRS})
+		set(VRJUGGLER_LIBRARY_DIRS ${VRJUGGLER31_LIBRARY_DIRS})
+
+		set(VRJUGGLER_ENVIRONMENT ${VRJUGGLER31_ENVIRONMENT})
+		set(VRJUGGLER_RUNTIME_LIBRARY_DIRS ${VRJUGGLER31_RUNTIME_LIBRARY_DIRS})
+
+		set(VRJUGGLER_CXX_FLAGS ${VRJUGGLER31_CXX_FLAGS})
+		set(VRJUGGLER_DEFINITIONS ${VRJUGGLER31_DEFINITIONS})
+		set(VRJUGGLER_BUNDLE_PLUGINS ${VRJUGGLER31_BUNDLE_PLUGINS})
+		set(VRJUGGLER_VJ_BASE_DIR ${VRJUGGLER31_VJ_BASE_DIR})
+		set(VRJUGGLER_VERSION 3.1)
+
+		macro(install_vrjuggler_data_files prefix)
+			install_vrjuggler31_data_files("${prefix}" ${ARGN})
+		endmacro()
+
+		macro(install_vrjuggler_plugins prefix varForFilenames)
+			install_vrjuggler31_plugins("${prefix}" ${varForFilenames} ${ARGN})
+		endmacro()
+	endif()
+endif()
+
+if(VRJUGGLER_FIND_30 AND (NOT VRJUGGLER_FOUND))
 	if(NOT VRJUGGLER30_ROOT_DIR)
 		set(VRJUGGLER30_ROOT_DIR ${VRJUGGLER_ROOT_DIR})
 	endif()
@@ -171,7 +214,10 @@ endif()
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(VRJuggler
-	DEFAULT_MSG VRJUGGLER_VERSION VRJUGGLER_LIBRARIES VRJUGGLER_FOUND)
+	DEFAULT_MSG
+	VRJUGGLER_VERSION
+	VRJUGGLER_LIBRARIES
+	VRJUGGLER_FOUND)
 
 if(VRJUGGLER_FOUND)
 	mark_as_advanced(VRJUGGLER_ROOT_DIR)
@@ -179,8 +225,10 @@ if(VRJUGGLER_FOUND)
 	# Set generic component variables, like VPR_LIBRARIES
 	if(VRJUGGLER_VERSION VERSION_EQUAL 2.2)
 		set(_components VRJ22 VRJOGL22 VPR20 TWEEK12 SONIX12 JCCL12)
-	else()
+	elseif(VRJUGGLER_VERSION VERSION_EQUAL 3.0)
 		set(_components VRJ30 VRJOGL30 VPR22 TWEEK14 SONIX14 JCCL14)
+	else()
+		set(_components VRJ31 VRJOGL31 VPR23 TWEEK15 SONIX15 JCCL15)
 	endif()
 
 	foreach(comp ${_components})
